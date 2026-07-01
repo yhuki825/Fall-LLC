@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>合同会社フォール | EC物販・ストア運営支援</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',    /* 信頼感のあるネイビー */
+                            primary: '#d97706', /* 成長・成功を表すアンバー */
+                            light: '#f8fafc',   /* 清潔感のあるオフホワイト */
+                            accent: '#3b82f6'   /* 先進的なブルー */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* スムーススクロールの調整 */
+        html {
+            scroll-padding-top: 80px;
+        }
+        /* フェードインアニメーション用 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans bg-brand-light text-slate-800 antialiased overflow-x-hidden">
+
+    <!-- ヘッダーナビゲーション -->
+    <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent py-5">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+            <!-- ロゴ -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-gradient-to-tr from-brand-primary to-amber-400 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg transition-transform group-hover:scale-105">
+                    F
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-bold tracking-wider text-slate-900 transition-colors duration-300" id="logo-text">合同会社フォール</span>
+                    <span class="text-[10px] text-slate-500 tracking-widest uppercase transition-colors duration-300" id="logo-sub">Fall LLC</span>
+                </div>
+            </a>
+
+            <!-- デスクトップメニュー -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#top" class="nav-link text-slate-700 hover:text-brand-primary font-medium text-sm transition-colors py-2">TOP</a>
+                <a href="#about" class="nav-link text-slate-700 hover:text-brand-primary font-medium text-sm transition-colors py-2">ABOUT</a>
+                <a href="#services" class="nav-link text-slate-700 hover:text-brand-primary font-medium text-sm transition-colors py-2">SERVICES</a>
+                <a href="#company" class="nav-link text-slate-700 hover:text-brand-primary font-medium text-sm transition-colors py-2">COMPANY</a>
+            </nav>
+
+            <!-- モバイルメニューボタン -->
+            <button id="menu-btn" class="md:hidden text-slate-900 focus:outline-none p-2 rounded-lg hover:bg-slate-100 transition-colors" aria-label="メニューを開く">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- モバイルメニュー（オーバーレイ） -->
+    <div id="mobile-menu" class="fixed inset-0 bg-brand-dark/95 z-40 flex flex-col justify-center items-center gap-8 translate-x-full transition-transform duration-300 md:hidden">
+        <!-- 閉じるボタン -->
+        <button id="close-btn" class="absolute top-6 right-6 text-white p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="メニューを閉じる">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <a href="#top" class="mobile-link text-2xl text-white hover:text-brand-primary font-medium tracking-wide">TOP</a>
+        <a href="#about" class="mobile-link text-2xl text-white hover:text-brand-primary font-medium tracking-wide">ABOUT</a>
+        <a href="#services" class="mobile-link text-2xl text-white hover:text-brand-primary font-medium tracking-wide">SERVICES</a>
+        <a href="#company" class="mobile-link text-2xl text-white hover:text-brand-primary font-medium tracking-wide">COMPANY</a>
+    </div>
+
+    <!-- ヒーローセクション -->
+    <section id="top" class="relative min-h-screen flex items-center pt-20 bg-brand-dark overflow-hidden">
+        <!-- 背景ビジュアル -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80" 
+                 alt="ビジネスの成長とデジタル化" 
+                 class="w-full h-full object-cover object-center opacity-25 scale-105 filter grayscale contrast-125"
+                 onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80'">
+            <!-- グラデーションオーバーレイ -->
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/90 to-transparent"></div>
+            <!-- 装飾用の光の輪 -->
+            <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-brand-primary/10 blur-3xl"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-brand-accent/10 blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10 py-16 w-full">
+            <div class="max-w-3xl">
+                <!-- タグ -->
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-brand-primary/20 text-brand-primary border border-brand-primary/30 mb-6 uppercase tracking-widest">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-primary animate-pulse"></span>
+                    EC Solutions & Support
+                </span>
+                
+                <!-- メインキャッチコピー -->
+                <h1 class="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight mb-6">
+                    ECの力で、<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-amber-400">ビジネスの未来</span>を<br class="md:hidden">切り拓く。
+                </h1>
+                
+                <!-- サブキャッチコピー -->
+                <p class="text-lg md:text-xl text-slate-300 leading-relaxed mb-10 font-light">
+                    合同会社フォールは、EC物販を軸とした革新的なサービスを展開し、個人事業主様から法人様まで、新たな挑戦と持続的なストア成長を全力で後押しします。
+                </p>
+
+                <!-- アクションエリア（ページ内アンカー） -->
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#services" class="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-brand-primary to-amber-500 text-white font-bold shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/40 hover:-translate-y-0.5 transition-all group">
+                        事業内容を見る
+                        <i data-lucide="arrow-right" class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1"></i>
+                    </a>
+                    <a href="#about" class="inline-flex items-center justify-center px-8 py-4 rounded-xl border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 font-semibold hover:bg-slate-800/50 transition-all">
+                        フォールについて
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下部スクロール案内 -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2">
+            <span class="text-[10px] text-slate-500 tracking-widest uppercase">Scroll Down</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-brand-primary to-transparent relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1/2 bg-white animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- コンセプトセクション (ABOUT) -->
+    <section id="about" class="py-24 md:py-32 bg-white relative overflow-hidden">
+        <!-- 背景装飾 -->
+        <div class="absolute top-1/2 left-0 -translate-y-1/2 w-72 h-72 bg-slate-50 rounded-full -translate-x-1/2 -z-10 blur-2xl"></div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                
+                <!-- テキストコンテンツ -->
+                <div class="reveal">
+                    <!-- セクションタイトル -->
+                    <div class="mb-8">
+                        <span class="text-brand-primary font-bold tracking-widest uppercase text-sm block mb-2">About Us</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 leading-snug">
+                            「売る」をもっと身近に。<br>ストアの可能性を最大化する。
+                        </h2>
+                    </div>
+
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        インターネットの普及により、誰もが世界中に価値を届けることができる時代になりました。しかし、同時にEC市場の競争は激化し、「ストアを作ったが売れない」「運用ノウハウが足りない」といった課題を抱える個人様・法人様が後を絶ちません。
+                    </p>
+                    <p class="text-slate-600 leading-relaxed mb-8">
+                        合同会社フォールは、自社で培った実践的なEC物販のノウハウをフルに活かし、ストアの立ち上げから効率的な運営管理までをワンストップでサポートします。泥臭い改善と最新トレンドの融合こそが、ビジネスを前進させる私たちのコアバリューです。
+                    </p>
+
+                    <!-- 特徴を示すミニグリッド -->
+                    <div class="grid grid-cols-2 gap-6 pt-6 border-t border-slate-100">
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-amber-50 rounded-lg text-brand-primary mt-1">
+                                <i data-lucide="trending-up" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">実践的なノウハウ</h4>
+                                <p class="text-xs text-slate-500 mt-1">現場で培った生きた施策を展開します。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 bg-blue-50 rounded-lg text-brand-accent mt-1">
+                                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">伴走型のサポート</h4>
+                                <p class="text-xs text-slate-500 mt-1">疑問や課題に寄り添い共に解決します。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 画像 / ビジュアル -->
+                <div class="relative reveal delay-100">
+                    <!-- メイン画像 -->
+                    <div class="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-slate-100 relative z-10">
+                        <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=1000&q=80" 
+                             alt="EC物販と商品の梱包・管理イメージ" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80'">
+                    </div>
+                    <!-- 背面の装飾パーツ -->
+                    <div class="absolute -bottom-6 -right-6 w-full h-full border-4 border-amber-100 rounded-2xl -z-0"></div>
+                    <!-- 実績・信頼感を伝えるフローティングバッジ -->
+                    <div class="absolute -top-6 -left-6 bg-brand-dark text-white p-6 rounded-xl shadow-xl z-20 hidden sm:block max-w-[200px]">
+                        <p class="text-2xl font-black text-brand-primary mb-1">Empower</p>
+                        <p class="text-xs text-slate-400 leading-relaxed">全てのストアオーナーの挑戦を成功へ導くために。</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 事業内容セクション (SERVICES) -->
+    <section id="services" class="py-24 md:py-32 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <!-- セクションタイトル（中央寄せ） -->
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal">
+                <span class="text-brand-primary font-bold tracking-widest uppercase text-sm block mb-2">Our Services</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-slate-900">事業を通じてビジネスを後押しする</h2>
+                <div class="w-16 h-1 bg-brand-primary mx-auto mt-6 rounded-full"></div>
+                <p class="text-slate-600 mt-6 leading-relaxed">
+                    フォールが提供するサービスは、単なるマニュアルの提供ではありません。市場の最前線でテストし、成果の実証された方法をベースにした「生きたECソリューション」を提供します。
+                </p>
+            </div>
+
+            <!-- 3つのサービスカード -->
+            <div class="grid lg:grid-cols-3 gap-8 md:gap-12">
+                
+                <!-- サービス1：EC物販事業 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group border border-slate-100 reveal">
+                    <!-- 画像 -->
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80" 
+                             alt="自社EC物販・流通サービス" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             onerror="this.src='https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=600&q=80'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                        <span class="absolute bottom-4 left-4 text-xs font-bold text-amber-300 tracking-wider uppercase">SERVICE 01</span>
+                    </div>
+                    <!-- 本文 -->
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-brand-primary transition-colors">
+                            EC物販事業の展開
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            個人様、法人様に向けて、トレンドを見据えた商品の仕入れから販売展開をトータルでコーディネートします。市場で今求められているものを迅速に分析し、高効率な供給スキームを構築することで、安定した販売チャネルの開拓を後押しします。
+                        </p>
+                        <ul class="space-y-2 mt-auto text-xs text-slate-500 border-t border-slate-100 pt-4">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-primary flex-shrink-0"></i>
+                                流通トレンドを捉えた販売戦略の提案
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-primary flex-shrink-0"></i>
+                                個人・法人それぞれの規模に合わせた展開
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- サービス2：ストア作成サポート -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group border border-slate-100 reveal delay-100">
+                    <!-- 画像 -->
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" 
+                             alt="ストア作成サポート" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             onerror="this.src='https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                        <span class="absolute bottom-4 left-4 text-xs font-bold text-amber-300 tracking-wider uppercase">SERVICE 02</span>
+                    </div>
+                    <!-- 本文 -->
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-brand-primary transition-colors">
+                            ストア作成・構築サポート
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            「何から始めればよいかわからない」という初心者の方でも安心のストア構築支援。主要ECプラットフォームの初期設定、商品の登録、効果的なデザインテンプレートの選定、決済代行の連携まで、ブランド価値がしっかりと伝わるストアを形にします。
+                        </p>
+                        <ul class="space-y-2 mt-auto text-xs text-slate-500 border-t border-slate-100 pt-4">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-primary flex-shrink-0"></i>
+                                プラットフォームの選定と最適設定
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-primary flex-shrink-0"></i>
+                                購買率（CVR）を高める初期動線の設計
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- サービス3：ストア管理・運営サポート -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group border border-slate-100 reveal delay-200">
+                    <!-- 画像 -->
+                    <div class="h-52 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80" 
+                             alt="ストア管理と運営サポート" 
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             onerror="this.src='https://images.unsplash.com/photo-1552581230-c01bc0d48403?auto=format&fit=crop&w=600&q=80'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                        <span class="absolute bottom-4 left-4 text-xs font-bold text-amber-300 tracking-wider uppercase">SERVICE 03</span>
+                    </div>
+                    <!-- 本文 -->
+                    <div class="p-8 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4 group-hover:text-brand-primary transition-colors">
+                            ストア管理・運営サポート
+                        </h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            開店後の運営こそがビジネスの本番です。売上の分析、在庫の適切な回転率管理、リピート施策の実施など、忙しいオーナー様に代わって、あるいはサポート役として、ストア全体のPDCAを回します。効率的なオペレーション構築で業務効率化も同時に図ります。
+                        </p>
+                        <ul class="space-y-2 mt-auto text-xs text-slate-500 border-t border-slate-100 pt-4">
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-primary flex-shrink-0"></i>
+                                データの可視化と改善アプローチの提示
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i data-lucide="check" class="w-4 h-4 text-brand-primary flex-shrink-0"></i>
+                                バックオフィス業務の自動化・効率化支援
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 企業理念 & 行動指針 (STATEMENT) -->
+    <section class="py-24 bg-brand-dark text-white relative overflow-hidden">
+        <!-- バックグラウンド装飾 -->
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 md:px-12 text-center relative z-10 reveal">
+            <h2 class="text-xs font-bold tracking-widest text-brand-primary uppercase mb-4">Our Mission</h2>
+            <p class="text-2xl md:text-3xl font-light leading-relaxed max-w-4xl mx-auto">
+                「小さく始めて、大きく育てる。」<br class="md:hidden">
+                フォールは、関わるすべての皆様の
+                自立したビジネスの基盤と、<br class="md:hidden">
+                持続的な価値創造のサイクルを伴走者として支え続けます。
+            </p>
+        </div>
+    </section>
+
+    <!-- 会社概要セクション (COMPANY) -->
+    <section id="company" class="py-24 md:py-32 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-20">
+                
+                <!-- セクションタイトル（左側） -->
+                <div class="lg:col-span-4 reveal">
+                    <span class="text-brand-primary font-bold tracking-widest uppercase text-sm block mb-2">Company Info</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 leading-tight">会社概要</h2>
+                    <div class="w-12 h-1 bg-brand-primary mt-4 rounded-full"></div>
+                    <p class="text-slate-500 text-sm mt-6 leading-relaxed">
+                        合同会社フォールは、葛飾区を拠点に全国の個人様・企業様のEC展開を強力に支えてまいります。
+                    </p>
+                    <div class="mt-8 p-6 bg-slate-50 rounded-xl inline-flex items-center gap-4 border border-slate-100">
+                        <i data-lucide="map-pin" class="w-8 h-8 text-brand-primary flex-shrink-0"></i>
+                        <div>
+                            <span class="text-xs text-slate-400 block font-semibold">Location</span>
+                            <span class="text-sm font-bold text-slate-800">東京都葛飾区鎌倉</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 会社概要テーブル（右側） -->
+                <div class="lg:col-span-8 reveal delay-100">
+                    <div class="border-t border-slate-100 divide-y divide-slate-100">
+                        
+                        <!-- 会社名 -->
+                        <div class="py-6 grid sm:grid-cols-4 gap-4 items-center">
+                            <span class="font-bold text-slate-900 sm:col-span-1">会社名</span>
+                            <span class="text-slate-700 sm:col-span-3 text-lg font-medium">合同会社フォール</span>
+                        </div>
+
+                        <!-- 代表者 -->
+                        <div class="py-6 grid sm:grid-cols-4 gap-4 items-center">
+                            <span class="font-bold text-slate-900 sm:col-span-1">代表者</span>
+                            <span class="text-slate-700 sm:col-span-3">小幡 歩夢</span>
+                        </div>
+
+                        <!-- 所在地 -->
+                        <div class="py-6 grid sm:grid-cols-4 gap-4 items-start">
+                            <span class="font-bold text-slate-900 sm:col-span-1">所在地</span>
+                            <div class="text-slate-700 sm:col-span-3">
+                                <span class="block text-sm text-slate-500 mb-1">〒125-0053</span>
+                                <span class="block">東京都葛飾区鎌倉3-30-4</span>
+                            </div>
+                        </div>
+
+                        <!-- 事業内容 -->
+                        <div class="py-6 grid sm:grid-cols-4 gap-4 items-start">
+                            <span class="font-bold text-slate-900 sm:col-span-1">事業内容</span>
+                            <div class="text-slate-700 sm:col-span-3 space-y-2">
+                                <p>• EC物販を活用した個人向け・法人向けサービスの展開</p>
+                                <p>• オンラインストアの管理および最適化のサポート</p>
+                                <p>• ストアの作成・デザイン・初期構築の総合サポート</p>
+                                <p>• 物販およびストア運用に関するコンサルティング業務</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="bg-brand-dark text-slate-400 py-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 pb-12 border-b border-slate-800">
+                <!-- ロゴマーク & 会社名 -->
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-brand-primary rounded-lg flex items-center justify-center text-white font-bold text-base shadow-lg">
+                        F
+                    </div>
+                    <span class="text-lg font-bold tracking-wider text-white">合同会社フォール</span>
+                </div>
+                <!-- メインナビの複製 -->
+                <nav class="flex flex-wrap justify-center gap-6 md:gap-8">
+                    <a href="#top" class="hover:text-white transition-colors text-sm">TOP</a>
+                    <a href="#about" class="hover:text-white transition-colors text-sm">ABOUT</a>
+                    <a href="#services" class="hover:text-white transition-colors text-sm">SERVICES</a>
+                    <a href="#company" class="hover:text-white transition-colors text-sm">COMPANY</a>
+                </nav>
+            </div>
+
+            <!-- コピーライトと企業ポリシー等 -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 text-xs text-slate-500">
+                <p>&copy; 2026 Fall LLC. All rights reserved.</p>
+                <p class="flex items-center gap-1">
+                    Designed for Partner's Success with <i data-lucide="heart" class="w-3 h-3 text-brand-primary fill-brand-primary"></i>
+                </p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JavaScript：メニュー操作、アニメーション -->
+    <script>
+        // Lucideアイコンの初期化
+        lucide.createIcons();
+
+        // 1. ヘッダースクロール時のデザイン変化
+        const header = document.getElementById('header');
+        const logoText = document.getElementById('logo-text');
+        const logoSub = document.getElementById('logo-sub');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.remove('bg-transparent', 'py-5');
+                header.classList.add('bg-white/95', 'backdrop-blur-md', 'py-4', 'shadow-md');
+                logoText.classList.remove('text-slate-900');
+                logoText.classList.add('text-slate-900');
+            } else {
+                header.classList.remove('bg-white/95', 'backdrop-blur-md', 'py-4', 'shadow-md');
+                header.classList.add('bg-transparent', 'py-5');
+            }
+        });
+
+        // 2. モバイルナビゲーションの開閉制御
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        const openMenu = () => {
+            mobileMenu.classList.remove('translate-x-full');
+            document.body.classList.add('overflow-hidden');
+        };
+
+        const closeMenu = () => {
+            mobileMenu.classList.add('translate-x-full');
+            document.body.classList.remove('overflow-hidden');
+        };
+
+        menuBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        mobileLinks.Fallach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // 3. スクロール時のフェードイン（Reveal）
+        const reveals = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150; // フェードインを開始する画面内位置のオフセット値
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // 初期読み込み時にも判定を実行
+        window.addEventListener('load', revealOnScroll);
+    </script>
+</body>
+</html>
