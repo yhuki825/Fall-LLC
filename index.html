@@ -46,7 +46,24 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* アニメーションを抑制する設定の環境では最初から表示 */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
     </style>
+    <!-- JavaScriptが無効・失敗した場合でもコンテンツを表示する -->
+    <noscript>
+        <style>
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        </style>
+    </noscript>
 </head>
 <body class="font-sans bg-brand-light text-slate-800 antialiased overflow-x-hidden">
 
@@ -450,8 +467,10 @@
 
     <!-- JavaScript：メニュー操作、アニメーション -->
     <script>
-        // Lucideアイコンの初期化
-        lucide.createIcons();
+        // Lucideアイコンの初期化（CDN読み込み失敗時も以降の処理を止めない）
+        if (window.lucide) {
+            lucide.createIcons();
+        }
 
         // 1. ヘッダースクロール時のデザイン変化
         const header = document.getElementById('header');
@@ -489,7 +508,7 @@
 
         menuBtn.addEventListener('click', openMenu);
         closeBtn.addEventListener('click', closeMenu);
-        mobileLinks.Fallach(link => {
+        mobileLinks.forEach(link => {
             link.addEventListener('click', closeMenu);
         });
 
@@ -508,8 +527,10 @@
             }
         };
 
-        window.addEventListener('scroll', revealOnScroll);
-        // 初期読み込み時にも判定を実行
+        window.addEventListener('scroll', revealOnScroll, { passive: true });
+        window.addEventListener('resize', revealOnScroll, { passive: true });
+        // 画像の読み込みを待たずに初期判定を実行
+        revealOnScroll();
         window.addEventListener('load', revealOnScroll);
     </script>
 </body>
